@@ -27,10 +27,6 @@ jobs:
         set +e
         npm install safe-chain-test
         exitCode=$?
-        if [[ $exitCode -eq 1 ]]; then
-          echo "Failed to download malware test!"
-        else
-          exit 1
-        fi
+        assert_eq "1" "$exitCode"
         exit 0
       continue-on-error: true
