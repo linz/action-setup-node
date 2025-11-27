@@ -1,0 +1,20 @@
+# CHANGE_ME - implement the actual action
+name: dummy composite action
+
+inputs:
+  input1:
+    description: value to set to DUMMY_INPUT1 environment variable
+  input2:
+    description: value to set to DUMMY_INPUT2 environment variable
+
+runs:
+  using: composite
+  steps:
+    - name: Dummy step 1
+      shell: bash
+      env:
+        INPUT1: ${{ inputs.input1 }}
+        INPUT2: ${{ inputs.input2 }}
+      run: |
+        echo "DUMMY_INPUT1=$INPUT1" >> $GITHUB_ENV
+        echo "DUMMY_INPUT2=$INPUT2" >> $GITHUB_ENV
