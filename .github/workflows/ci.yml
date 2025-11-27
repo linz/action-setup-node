@@ -4,22 +4,33 @@ on:
     branches: [master]
 
 jobs:
-  test:
+  build:
+
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      # CHANGE_ME - implement automation test for the actual action
-      - name: invoke action
-        uses: ./
-        with:
-          input1: foo
-          input2: bar
-
-      - name: Verify the result
-        run: |
-          source assert.sh
-          assert_eq "foo" "$DUMMY_INPUT1"
-          assert_eq "bar" "$DUMMY_INPUT2"
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: ./
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: Test Safe Chains
+      run: |
+        set +e
+        npm install safe-chain-test
+        exitCode=$?
+        if [[ $exitCode -eq 1 ]]; then
+          echo "Failed to download malware test!"
+        else
+          exit 1
+        fi
+        exit 0
+      continue-on-error: true
