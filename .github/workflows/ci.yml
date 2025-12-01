@@ -24,14 +24,10 @@ jobs:
       uses: ./
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: './test'
-    - run: npm ci
-    - run: npm run build --if-present
     - name: Test Safe Chains
       run: |
         set +e
-        npm install safe-chain-test
+        npm install -g safe-chain-test
         exitCode=$?
         assert_eq "1" "$exitCode"
         exit 0
