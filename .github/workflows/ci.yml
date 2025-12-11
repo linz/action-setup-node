@@ -28,7 +28,7 @@ jobs:
     - name: Check outputs
       run: |
         source assert.sh
-        assert_eq "$(node -v)" "${{ steps.setup-node.outputs.node-version }}"
+        assert_eq $(node -v) "${{ steps.setup-node.outputs.node-version }}"
         
     - name: Test Safe Chains
       run: |
