@@ -32,6 +32,7 @@ jobs:
         
     - name: Test Safe Chains
       run: |
+        source assert.sh
         set +e
         npm install -g safe-chain-test
         exitCode=$?
