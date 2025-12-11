@@ -32,8 +32,10 @@ inputs:
 outputs:
   cache-hit: 
     description: 'A boolean value to indicate if a cache was hit.'
+    value: ${{ steps.setup-node.outputs.cache-hit }}
   node-version:
     description: 'The installed node version.'
+    value: ${{ steps.setup-node.outputs.node-version }}
 
 
 runs:
@@ -55,11 +57,6 @@ runs:
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         mirror: ${{ inputs.mirror }}
         mirror-token: ${{ inputs.mirror-token }}
-    - name: Write output
-      shell: bash
-      run: |
-        echo "node-version=${{ steps.setup-node.outputs.node-version }}" >> $GITHUB_OUTPUT
-        echo "cache-hit=${{ steps.setup-node.outputs.cache-hit }}" >> $GITHUB_OUTPUT
     - name: Setup Aikido Safe-Chain
       shell: bash
       run: |
