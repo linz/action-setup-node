@@ -25,10 +25,12 @@ jobs:
       uses: ./
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Test Safe Chains
+        
+    - name: Check outputs
       run: |
         echo ${{ steps.test.outputs.cache-hit }}
         echo ${{ steps.test.outputs.node-version }}
+        cat $GITHUB_OUTPUT
     - name: Test Safe Chains
       run: |
         set +e
