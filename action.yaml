@@ -37,30 +37,31 @@ outputs:
 
 
 runs:
-  outputs:
-    cache-hit: ${{ steps.setup-node.outputs.cache-hit }}
-    node-version: ${{ steps.setup-node.outputs.node-version }}
-  using: composite
-  steps:
-    - name: Setup Node.js
-      id: setup-node
-      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
-      with:
-        node-version: ${{ inputs.node-version }}
-        node-version-file: ${{ inputs.node-version-file }}
-        architecture: ${{ inputs.architecture }}
-        check-latest: ${{ inputs.check-latest }}
-        registry-url: ${{ inputs.registry-url }}
-        scope: ${{ inputs.scope }}
-        token: ${{ inputs.token }}
-        cache: ${{ inputs.cache }}
-        package-manager-cache: ${{ inputs.package-manager-cache }}
-        cache-dependency-path: ${{ inputs.cache-dependency-path }}
-        mirror: ${{ inputs.mirror }}
-        mirror-token: ${{ inputs.mirror-token }}
+  setup-node:
+    outputs:
+      cache-hit: ${{ steps.setup-node.outputs.cache-hit }}
+      node-version: ${{ steps.setup-node.outputs.node-version }}
+    using: composite
+    steps:
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: ${{ inputs.node-version }}
+          node-version-file: ${{ inputs.node-version-file }}
+          architecture: ${{ inputs.architecture }}
+          check-latest: ${{ inputs.check-latest }}
+          registry-url: ${{ inputs.registry-url }}
+          scope: ${{ inputs.scope }}
+          token: ${{ inputs.token }}
+          cache: ${{ inputs.cache }}
+          package-manager-cache: ${{ inputs.package-manager-cache }}
+          cache-dependency-path: ${{ inputs.cache-dependency-path }}
+          mirror: ${{ inputs.mirror }}
+          mirror-token: ${{ inputs.mirror-token }}
 
-    - name: Setup Aikido Safe-Chain
-      shell: bash
-      run: |
-        npm i -g @aikidosec/safe-chain
-        safe-chain setup-ci
+      - name: Setup Aikido Safe-Chain
+        shell: bash
+        run: |
+          npm i -g @aikidosec/safe-chain
+          safe-chain setup-ci
