@@ -38,10 +38,10 @@ outputs:
 
 runs:
   setup-node:
+    using: composite
     outputs:
       cache-hit: ${{ steps.setup-node.outputs.cache-hit }}
       node-version: ${{ steps.setup-node.outputs.node-version }}
-    using: composite
     steps:
       - name: Setup Node.js
         id: setup-node
