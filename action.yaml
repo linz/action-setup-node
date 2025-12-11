@@ -37,8 +37,8 @@ outputs:
 
 
 runs:
+  using: composite
   setup-node:
-    using: composite
     outputs:
       cache-hit: ${{ steps.setup-node.outputs.cache-hit }}
       node-version: ${{ steps.setup-node.outputs.node-version }}
