@@ -28,8 +28,6 @@ jobs:
         
     - name: Check outputs
       run: |
-        echo ${{ steps.test.outputs.cache-hit }}
-        echo ${{ steps.test.outputs.node-version }}
         cat $GITHUB_OUTPUT
     - name: Test Safe Chains
       run: |
