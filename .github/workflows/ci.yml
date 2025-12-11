@@ -27,11 +27,11 @@ jobs:
         
     - name: Check outputs
       run: |
+        set +e
         assert_eq "$(node -v)" "${{ steps.setup-node.outputs.node-version }}"
         
     - name: Test Safe Chains
       run: |
-        set +e
         npm install -g safe-chain-test
         exitCode=$?
         assert_eq "1" "$exitCode"
