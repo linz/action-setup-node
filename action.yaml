@@ -55,10 +55,11 @@ runs:
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         mirror: ${{ inputs.mirror }}
         mirror-token: ${{ inputs.mirror-token }}
-    - name: Check output
+    - name: Write output
       shell: bash
       run: |
-        echo ${{ steps.setup-node.outputs.node-version }}
+        echo "node-version=${{ steps.setup-node.outputs.node-version }}" >> $GITHUB_OUTPUT
+        echo "cache-hit=${{ steps.setup-node.outputs.cache-hit }}" >> $GITHUB_OUTPUT
     - name: Setup Aikido Safe-Chain
       shell: bash
       run: |
