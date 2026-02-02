@@ -59,6 +59,8 @@ runs:
         mirror-token: ${{ inputs.mirror-token }}
     - name: Setup Aikido Safe-Chain
       shell: bash
+      env:
+        SAFE_CHAIN_NPM_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@linz/*,@linzjs/*,@basemaps/*"
       run: |
         npm i -g @aikidosec/safe-chain
         safe-chain setup-ci
