@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/linz/action-setup-node/compare/v1.0.1...v1.0.2) (2026-02-23)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/checkout from 4 to 6 ([#4](https://github.com/linz/action-setup-node/issues/4)) ([bcbb12d](https://github.com/linz/action-setup-node/commit/bcbb12db1be4b6730c5fe2e32bf12caedc49ad0e))
+
 ## [1.0.1](https://github.com/linz/action-setup-node/compare/v1.0.0...v1.0.1) (2026-02-12)
 
 
