@@ -64,4 +64,4 @@ runs:
       run: |
         npm i -g @aikidosec/safe-chain
         safe-chain setup-ci
-
+        npm config set ignore-scripts true
