@@ -62,6 +62,27 @@ runs:
       env:
         SAFE_CHAIN_NPM_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@linz/*,@linzjs/*,@basemaps/*"
       run: |
-        npm i -g @aikidosec/safe-chain
-        safe-chain setup-ci
+        set -Eeuo pipefail
 
+        MAX_ATTEMPTS=5
+        DELAY=5  # seconds
+
+        echo "Installing @aikidosec/safe-chain globally with exponential backoff (max $MAX_ATTEMPTS attempts)..."
+        for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
+          if npm install -g "@aikidosec/safe-chain"; then
+            echo "✅ @aikidosec/safe-chain installed successfully on attempt $ATTEMPT"
+            break
+          fi
+
+          if [[ "$ATTEMPT" -eq "$MAX_ATTEMPTS" ]]; then
+            echo "❌ Failed to install @aikidosec/safe-chain after $MAX_ATTEMPTS attempts"
+            exit 1
+          fi
+
+          echo "⚠️ Attempt $ATTEMPT failed. Retrying in $DELAYs..."
+          sleep "$DELAY"
+          DELAY=$(( DELAY * 2 ))  # exponential backoff
+        done
+
+        # Proceed with setup after successful install
+        safe-chain setup-ci
