@@ -86,3 +86,4 @@ runs:
 
         # Proceed with setup after successful install
         safe-chain setup-ci
+        npm config set ignore-scripts true
