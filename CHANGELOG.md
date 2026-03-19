@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/linz/action-setup-node/compare/v1.0.2...v1.0.3) (2026-03-19)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/setup-node from 6.2.0 to 6.3.0 ([#13](https://github.com/linz/action-setup-node/issues/13)) ([9b854a1](https://github.com/linz/action-setup-node/commit/9b854a1d2a3b4c8f52ebcd799c3465ba26d4497b))
+
 ## [1.0.2](https://github.com/linz/action-setup-node/compare/v1.0.1...v1.0.2) (2026-03-03)
 
 
