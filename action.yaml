@@ -60,9 +60,11 @@ runs:
     - name: Setup Aikido Safe-Chain
       shell: bash
       env:
-        SAFE_CHAIN_NPM_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@linz/*,@linzjs/*,@basemaps/*"
+        SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@linz/*,@linzjs/*,@basemaps/*"
       run: |
         set -Eeuo pipefail
+
+        echo "SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS=${SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS}" >> "$GITHUB_ENV"
 
         MAX_ATTEMPTS=5
         DELAY=5  # seconds
