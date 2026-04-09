@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/linz/action-setup-node/compare/v1.0.3...v1.0.4) (2026-04-09)
+
+
+### Bug Fixes
+
+* Fix an issue where linz public packages are not being excluded from minimum package age check. ([#15](https://github.com/linz/action-setup-node/issues/15)) ([ec16285](https://github.com/linz/action-setup-node/commit/ec16285c8fbabf22959adb04281ec0a077effb4d))
+
 ## [1.0.3](https://github.com/linz/action-setup-node/compare/v1.0.2...v1.0.3) (2026-03-19)
 
 
