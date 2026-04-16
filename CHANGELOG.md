@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/linz/action-setup-node/compare/v1.0.4...v1.0.5) (2026-04-16)
+
+
+### Bug Fixes
+
+* **deps:** bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([#17](https://github.com/linz/action-setup-node/issues/17)) ([0dc00b1](https://github.com/linz/action-setup-node/commit/0dc00b17cd3f64478277efa8f5e0780e40bee432))
+
 ## [1.0.4](https://github.com/linz/action-setup-node/compare/v1.0.3...v1.0.4) (2026-04-09)
 
 
