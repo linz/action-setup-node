@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.5](https://github.com/linz/action-setup-node/compare/v1.0.4...v1.0.5) (2026-05-20)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/setup-node from 6.3.0 to 6.4.0 ([#19](https://github.com/linz/action-setup-node/issues/19)) ([157c46e](https://github.com/linz/action-setup-node/commit/157c46efb835f1373566dcf86c4fdd60bc36a839))
+* **deps:** bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([#17](https://github.com/linz/action-setup-node/issues/17)) ([0dc00b1](https://github.com/linz/action-setup-node/commit/0dc00b17cd3f64478277efa8f5e0780e40bee432))
+* **deps:** bump googleapis/release-please-action from 4.4.1 to 5.0.0 ([#20](https://github.com/linz/action-setup-node/issues/20)) ([007082a](https://github.com/linz/action-setup-node/commit/007082ae0d4faba7ff782b98cdc1b47072eaf5a8))
+
 ## [1.0.4](https://github.com/linz/action-setup-node/compare/v1.0.3...v1.0.4) (2026-04-09)
 
 
