@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.6](https://github.com/linz/action-setup-node/compare/v1.0.5...v1.0.6) (2026-06-18)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/checkout from 6 to 6.0.2 ([#21](https://github.com/linz/action-setup-node/issues/21)) ([9ffb838](https://github.com/linz/action-setup-node/commit/9ffb838ea12e1faf708a484e0a10174f84dbb13c))
+* **deps:** bump actions/checkout from 6.0.2 to 6.0.3 ([#23](https://github.com/linz/action-setup-node/issues/23)) ([3f8dee1](https://github.com/linz/action-setup-node/commit/3f8dee1d0797854ce8b298e191d03849d1d3b741))
+
 ## [1.0.5](https://github.com/linz/action-setup-node/compare/v1.0.4...v1.0.5) (2026-05-20)
 
 
