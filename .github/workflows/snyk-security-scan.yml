@@ -8,7 +8,7 @@ jobs:
   snyk:
     uses: linz/github-action-shared-library/.github/workflows/snyk-workflow.yml@master
     with:
-      snykOrgName: "kapua"
+      snykOrgName: "security-7ui"
       snykAlwaysPass: true
       severityThreshold: medium
       strictOutOfSync: true
