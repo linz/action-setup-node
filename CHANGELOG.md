@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/linz/action-setup-node/compare/v1.0.7...v1.0.8) (2026-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/setup-node from 7.0.0 to 7.1.0 ([#33](https://github.com/linz/action-setup-node/issues/33)) ([17b4d66](https://github.com/linz/action-setup-node/commit/17b4d6646b843f1a88b9e98a4064dbc724167464))
+
 ## [1.0.7](https://github.com/linz/action-setup-node/compare/v1.0.6...v1.0.7) (2026-08-12)
 
 
