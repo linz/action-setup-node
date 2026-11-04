@@ -4,14 +4,64 @@ on:
     branches: [main, master, develop]
   push:
     branches: [main, master, develop]
+
+# Standalone version of linz/github-action-shared-library snyk-workflow.yml.
+# This repo is public, so it cannot call workflows or actions from the internal shared library.
 jobs:
   snyk:
-    uses: linz/github-action-shared-library/.github/workflows/snyk-workflow.yml@master
-    with:
-      snykOrgName: "security-7ui"
-      snykAlwaysPass: true
-      severityThreshold: medium
-      strictOutOfSync: true
-      backendDisable: true
-    secrets:
+    name: Snyk Security check
+    # Pull requests from forks do not get SNYK_TOKEN
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SNYK_ORG: security-7ui
+      SEVERITY_THRESHOLD: medium
+      STRICT_OUT_OF_SYNC: true
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      BRANCH: ${{ github.head_ref || github.ref_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Snyk CLI
+        uses: snyk/actions/setup@86b1cee1b8e110a78d528b3e1328a80e218111d2 # master
+
+      # Scans always pass on findings (exit code 1); results are reported to Snyk.
+      # Exit code 3 means no supported files were found, which is expected for this repo.
+      - name: Snyk Static Code Scan
+        shell: bash
+        run: |
+          set +e
+          snyk code test --target-reference=$BRANCH --severity-threshold=$SEVERITY_THRESHOLD --org=$SNYK_ORG --report --project-name=$GITHUB_REPOSITORY --json-file-output=codeScanResults.json
+          EXIT_CODE=$?
+          if [ "$EXIT_CODE" -eq 0 ] || [ "$EXIT_CODE" -eq 1 ] || [ "$EXIT_CODE" -eq 3 ]; then
+            echo "Snyk code scan exited with code $EXIT_CODE; continuing."
+            exit 0
+          fi
+          echo "Snyk code scan failed with exit code $EXIT_CODE."
+          exit "$EXIT_CODE"
+
+      - name: Snyk Dependency Scan
+        shell: bash
+        run: |
+          set +e
+          snyk monitor --target-reference=$BRANCH --strict-out-of-sync=$STRICT_OUT_OF_SYNC --all-projects --org=$SNYK_ORG --json > depScanResults.json
+          EXIT_CODE=$?
+          if [ "$EXIT_CODE" -eq 0 ] || [ "$EXIT_CODE" -eq 1 ] || [ "$EXIT_CODE" -eq 3 ]; then
+            echo "Snyk dependency scan exited with code $EXIT_CODE; continuing."
+            exit 0
+          fi
+          echo "Snyk dependency scan failed with exit code $EXIT_CODE."
+          exit "$EXIT_CODE"
+
+      - name: Publish Snyk JSON Output
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # @v7.0.2
+        with:
+          name: snyk-scan-json-results
+          path: |
+            codeScanResults.json
+            depScanResults.json
+          if-no-files-found: ignore
