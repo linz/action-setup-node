@@ -16,7 +16,7 @@ jobs:
     permissions:
       contents: read
     env:
-      SNYK_ORG: security-7ui
+      SNYK_ORG: kapua
       SEVERITY_THRESHOLD: medium
       STRICT_OUT_OF_SYNC: true
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
